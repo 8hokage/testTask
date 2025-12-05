@@ -1,7 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useDeleteUser, useUsers } from "@/hooks/useUsers";
-import { Table, TableBody, TableHead, TableHeader, TableRow, TableCell } from "@/components/common/table";
+import { useCallback, useEffect, useState } from "react";
+import { useDeleteUser, User, useUsers } from "@/hooks/use-users";
+import { Table, TableBody, TableHead, TableHeader, TableRow, TableCell } from "@/components/ui/table";
 import { UserRow } from "@/components/users/UserRow";
 import { UserTableToolbar } from "@/components/users/UserTableToolbar";
 
@@ -20,12 +20,16 @@ export function UserTable() {
   const users = data ?? [];
   const isBusy = isLoading || isFetching;
 
+  const handleDelete = useCallback(async (user: User) => {
+    await deleteUser(user.id);
+  }, [deleteUser]);
+
   return (
     <div className="mx-auto max-w-6xl p-6 space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-semibold">Users</h1>
       </div>
-      <UserTableToolbar value={input} onChange={setInput} busy={isBusy} />
+      <UserTableToolbar value={input} onChange={setInput} />
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -44,10 +48,7 @@ export function UserTable() {
                 key={u.id}
                 user={u}
                 disabled={isDeleting}
-                onDelete={async (user) => {
-                  const ok = window.confirm(`Delete ${user.name}? This action cannot be undone.`);
-                  if (ok) await deleteUser(user.id);
-                }}
+                onDelete={handleDelete}
               />
             ))}
             {!isBusy && users.length === 0 && (

@@ -1,13 +1,11 @@
-import { Input } from "@/components/common/input";
-import { Loader2 } from "lucide-react";
+import { Input } from "@/components/ui/input";
 
 type Props = {
   value: string;
   onChange: (v: string) => void;
-  busy?: boolean;
 };
 
-export function UserTableToolbar({ value, onChange, busy }: Props) {
+export function UserTableToolbar({ value, onChange }: Props) {
   return (
     <div className="flex items-center gap-3">
       <Input
@@ -15,7 +13,6 @@ export function UserTableToolbar({ value, onChange, busy }: Props) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
-      {busy && <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />}
     </div>
   );
 }

@@ -10,8 +10,7 @@
     "prisma": "prisma",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev --name init",
-    "db:push": "prisma db push",
-    "db:seed": "ts-node src/seed/seed.ts"
+    "db:push": "prisma db push"
   },
   "dependencies": {
     "@faker-js/faker": "^9.0.0",
