@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 import { useDeleteUser, User, useUsers } from "@/hooks/use-users";
-import { Table, TableBody, TableHead, TableHeader, TableRow, TableCell } from "@/components/ui/table";
+import { Table, TableBody, TableHead, TableHeader, TableRow, TableCell, TableCaption } from "@/components/ui/table";
 import { UserRow } from "@/components/users/UserRow";
 import { UserTableToolbar } from "@/components/users/UserTableToolbar";
 
@@ -59,6 +59,13 @@ export function UserTable() {
               </TableRow>
             )}
           </TableBody>
+          {(isLoading || isFetching) && (
+            <TableCaption>
+              <div className="flex items-center justify-center gap-2">
+                <span>Loading...</span>
+              </div>
+            </TableCaption>
+          )}
         </Table>
       </div>
     </div>

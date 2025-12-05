@@ -2,15 +2,15 @@ import { Button } from "@/components/ui/button";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { User } from "@/hooks/use-users";
 import { useState } from "react";
-import { ConfirmDialog } from "@/components/ui/confirm-dialog";
+import { Confirm } from "@/components/ui/confirm";
 
-type Props = {
+interface UserRowProps {
   user: User;
   onDelete: (user: User) => void;
   disabled?: boolean;
 };
 
-export function UserRow({ user, onDelete, disabled }: Props) {
+export function UserRow({ user, onDelete, disabled }: UserRowProps) {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -31,7 +31,7 @@ export function UserRow({ user, onDelete, disabled }: Props) {
           </Button>
         </TableCell>
       </TableRow>
-      <ConfirmDialog
+      <Confirm
         open={open}
         onOpenChange={setOpen}
         title="Delete user?"
